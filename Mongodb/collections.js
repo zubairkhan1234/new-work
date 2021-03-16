@@ -40,6 +40,8 @@ var userSchema = new mongoose.Schema({
     email: String,
     password: String,
     role: String,
+    gender: String,
+    city: String,
     createdOn: { type: String, "default": Date.now }
 })
 

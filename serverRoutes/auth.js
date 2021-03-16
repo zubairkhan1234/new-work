@@ -13,13 +13,16 @@ var api = express.Router()
 
 api.post('/signup', (req, res, next) => {
     console.log(req.body.userName)
-    console.log(req.body.userEmail)
-    console.log(req.body.userPhone)
-    console.log(req.body.userPassword)
-    if (!req.body.name
+    console.log(req.body.email)
+    console.log(req.body.city)
+    console.log(req.body.gender)
+    console.log(req.body.role)
+    console.log(req.body.password)
+    if (!req.body.userName
         || !req.body.email
-        || !req.body.phone
         || !req.body.password
+        || !req.body.gender
+        || !req.body.city
         || !req.body.role) {
         res.status(403).send(`
         please send complete information
@@ -30,6 +33,7 @@ api.post('/signup', (req, res, next) => {
             "password": "1234",
             "phone": "01312314",
             "role" : "company ",
+            "city" : "city ",
         }`);
         return
     };
@@ -46,11 +50,12 @@ api.post('/signup', (req, res, next) => {
 
             bcrypt.stringToHash(req.body.password).then(function (HashPassword) {
                 var newUaser = new collageUser({
-                    "name": req.body.name,
+                    "name": req.body.userName,
                     "email": req.body.email,
                     "password": HashPassword,
-                    "phone": req.body.phone,
-                    "role": req.body.role
+                    "role": req.body.role,
+                    "gender": req.body.gender,
+                    "city": req.body.city
                 });
 
                 newUaser.save((err, data) => {
